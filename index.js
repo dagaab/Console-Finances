@@ -112,17 +112,34 @@ let averageChanges = changeTotal / (monthsTotal - 1)
 
 console.log("Average Change: " + averageChanges.toFixed(2));
 
-// NOT WORKING - CHANGE -The greatest increase in Profit/Losses (date and difference in the amounts) over the entire period:
-/*function greatestIncrease(arr) {
-  let i;
-  let max = arr[0];
-  for (i = 1; i < arr.length; i++) {
-    if (arr[i] > max) 
-        max = arr[i]; 
-}
-}
-console.log("Greatest Increase in Profits/Losses: " + greatestIncrease)
+// The greatest increase in Profit (date and difference in the amounts) over the entire period:
 
-// The greatest decrease in Profit/Losses (date and difference in the amounts) over the entire period.
+var greatestIncrease = 0;
+var greatestIncreasePeriod = "";
+for (var i = 1; i < finances.length; i++) {
+    var increase = finances[i][1] - finances[i-1][1];
+    if (increase > greatestIncrease) {
+        greatestIncrease = increase;
+        greatestIncreasePeriod = finances[i][0];
+    }
+  }  
 
-console.log("Greatest Increase in Profits/Losses: + ")*/
+  console.log("Greatest Increase in Profits/Losses: " + greatestIncreasePeriod +  "($" + greatestIncrease + ")")
+  
+  
+  // The greatest increase in Losses (date and difference in the amounts) over the entire period:     
+
+var greatestDecrease = 0;
+var greatestDecreasePeriod = "";
+for(var i = 1; i < finances.length; i++) {
+   var decrease = finances[i-1][1] - finances[i][1];
+   if (decrease > greatestDecrease) {
+    greatestDecrease = decrease;
+    greatestDecreasePeriod = finances[i][0];
+   } 
+}
+
+console.log("Greatest Decrease in Profits/Losses: " + greatestDecreasePeriod +  "($" + greatestDecrease + ")")
+    
+
+
